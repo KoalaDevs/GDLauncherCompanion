@@ -1,0 +1,16 @@
+[
+{
+  "modid": "gdlaunchercompanion",
+  "name": "GDLauncher Companion Mod",
+  "description": "Provides advanced integration with GDLauncher",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Zabi94", "GorillaDevs"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
