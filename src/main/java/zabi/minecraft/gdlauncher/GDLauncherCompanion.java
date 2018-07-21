@@ -30,37 +30,37 @@ import zabi.minecraft.gdlauncher.utils.IPCDispatcher.GameType;
 		)
 
 public class GDLauncherCompanion {
-	
+
 	public static final String MOD_ID = "gdlaunchercompanion";
 	public static final String MOD_NAME = "GDLauncher Companion Mod";
-	public static final String MOD_VERSION = "0.0.3a";
+	public static final String MOD_VERSION = "1.0";
 	public static final String MC_VERSION = "[1.8.9,1.14)";
-	
+
 	public static int port = 0;
-	
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt) {
 		ModConfig.init(evt.getSuggestedConfigurationFile());
-		
+
 		String pathPortFile = evt.getSuggestedConfigurationFile().getParentFile().getParentFile().toString();
 		File portFile = new File(pathPortFile + File.separatorChar + "GDLPortComms.cfg");
-		
+
 		if (!portFile.exists() || portFile.isDirectory()) {
-			Log.e("Cannot find rendez-vous port. Use latest GDLauncher and GDLauncherCompanion mod");
-			return;
+			Log.e("Cannot find rendez-vous port. Falling back to default (2002)");
+			port = 2002;
+		} else {
+			try {
+				BufferedReader br = new BufferedReader(new FileReader(portFile));
+				port = Integer.parseInt(br.readLine());
+				br.close();
+			} catch (Exception e) {
+				Log.e("Invalid rendez-vous port configuration. Falling back to default (2002)", e);
+				port = 2002;
+			}
 		}
-		
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(portFile));
-			port = Integer.parseInt(br.readLine());
-			br.close();
-		} catch (Exception e) {
-			Log.e("Invalid rendez-vous port configuration. Use latest GDLauncher and GDLauncherCompanion mod", e);
-			return;
-		}
-		
+
 		if (port<1024) {
-			Log.e("Invalid rendez-vous port found. Use latest GDLauncher and GDLauncherCompanion mod");
+			Log.e("Invalid rendez-vous port found. Port needs to be > 1024");
 			return;
 		}
 		Log.i("GDLauncherCompanion is using port "+port);
@@ -76,11 +76,11 @@ public class GDLauncherCompanion {
 			GameStatusListener.listen();
 		}
 	}
-	
+
 	static class LaunchListener {
-		
+
 		private static final Field guiField = ReflectionHelper.findField(GuiScreenEvent.class, "gui"); //1.8 version doesn't have the getGui() method
-		
+
 		@SubscribeEvent
 		public void initGui(InitGuiEvent.Post evt) {
 			try {
@@ -95,6 +95,6 @@ public class GDLauncherCompanion {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 }

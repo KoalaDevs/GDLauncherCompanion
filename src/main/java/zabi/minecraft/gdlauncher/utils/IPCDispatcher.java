@@ -1,10 +1,8 @@
 package zabi.minecraft.gdlauncher.utils;
 
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Objects;
 
 import com.google.gson.JsonObject;
@@ -41,10 +39,8 @@ public class IPCDispatcher {
 			bw.write(json.toString());
 			bw.close();
 			connection.close();
-		} catch (UnknownHostException e) {
-			Log.e("Cannot connect to GDLauncher service", e);
-		} catch (IOException e) {
-			Log.e("Cannot connect to GDLauncher service", e);
+		} catch (Exception e) {
+			Log.e("Cannot connect to GDLauncher service\n" + e);
 		}
 	}
 }
