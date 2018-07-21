@@ -1,4 +1,4 @@
-package zabi.minecraft.gdlauncher;
+package zabi.minecraft.gdlauncher.utils;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -9,15 +9,19 @@ import java.util.Objects;
 
 import com.google.gson.JsonObject;
 
+import zabi.minecraft.gdlauncher.GDLauncherCompanion;
+import zabi.minecraft.gdlauncher.services.Log;
+
 public class IPCDispatcher {
 	
 	public static enum GameType {
-		NONE, SINGLEPLAYER, MULTIPLAYER, LAN 
+		NONE, SINGLEPLAYER, MULTIPLAYER 
 	}
 	
 	
 	public static void setGamePlaying(GameType type, String name, String address, String motd, String iconBase64) {
 		Objects.requireNonNull(type);
+		Log.i("Setting game");
 		JsonObject json = new JsonObject();
 		json.addProperty("type", type.ordinal());
 		if (name!=null) {

@@ -1,7 +1,9 @@
-package zabi.minecraft.gdlauncher;
+package zabi.minecraft.gdlauncher.services;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import zabi.minecraft.gdlauncher.GDLauncherCompanion;
 
 public class Log {
 	

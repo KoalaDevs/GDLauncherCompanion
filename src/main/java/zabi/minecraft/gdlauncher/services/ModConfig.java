@@ -1,4 +1,4 @@
-package zabi.minecraft.gdlauncher;
+package zabi.minecraft.gdlauncher.services;
 
 import java.io.File;
 
