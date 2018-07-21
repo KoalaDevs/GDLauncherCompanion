@@ -21,7 +21,6 @@ public class IPCDispatcher {
 	
 	public static void setGamePlaying(GameType type, String name, String address, String motd, String iconBase64) {
 		Objects.requireNonNull(type);
-		Log.i("Setting game");
 		JsonObject json = new JsonObject();
 		json.addProperty("type", type.ordinal());
 		if (name!=null) {

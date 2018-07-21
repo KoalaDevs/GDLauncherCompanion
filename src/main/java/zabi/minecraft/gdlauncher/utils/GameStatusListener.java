@@ -5,7 +5,6 @@ import net.minecraft.client.multiplayer.ServerData;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
-import zabi.minecraft.gdlauncher.services.Log;
 import zabi.minecraft.gdlauncher.services.ModConfig;
 import zabi.minecraft.gdlauncher.utils.IPCDispatcher.GameType;
 
@@ -19,9 +18,7 @@ public class GameStatusListener {
 	
 	@SubscribeEvent
 	public void clientConnect(PlayerTickEvent evt) {
-		Log.i("Connect");
 		if (Minecraft.getMinecraft().world!=null) {
-			Log.i("Connect2");
 			notifyGameChange();
 			stopListening();
 		}
@@ -41,7 +38,6 @@ public class GameStatusListener {
 	}
 	
 	public static void listen() {
-		Log.i("Listening");
 		if (!listening && ModConfig.sharePlayingInfo) {
 			listening=true;
 			MinecraftForge.EVENT_BUS.register(INSTANCE);
@@ -49,7 +45,6 @@ public class GameStatusListener {
 	}
 	
 	public static void stopListening() {
-		Log.i("No Listening");
 		if (listening) {
 			listening=false;
 			MinecraftForge.EVENT_BUS.unregister(INSTANCE);

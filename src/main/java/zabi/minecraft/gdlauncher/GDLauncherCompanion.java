@@ -34,7 +34,7 @@ public class GDLauncherCompanion {
 	public static final String MOD_ID = "gdlaunchercompanion";
 	public static final String MOD_NAME = "GDLauncher Companion Mod";
 	public static final String MOD_VERSION = "0.0.3a";
-	public static final String MC_VERSION = "[1.8,1.14)";
+	public static final String MC_VERSION = "[1.8.9,1.14)";
 	
 	public static int port = 0;
 	
@@ -71,7 +71,6 @@ public class GDLauncherCompanion {
 
 	@SubscribeEvent
 	public void clientDisconnect(ClientDisconnectionFromServerEvent evt) {
-		Log.i("Disc");
 		if (ModConfig.sharePlayingInfo) {
 			IPCDispatcher.setGamePlaying(GameType.NONE, null, null, null, null);
 			GameStatusListener.listen();
@@ -84,7 +83,6 @@ public class GDLauncherCompanion {
 		
 		@SubscribeEvent
 		public void initGui(InitGuiEvent.Post evt) {
-			Log.i("guiInit");
 			try {
 				if (ModConfig.sharePlayingInfo && guiField.get(evt) instanceof GuiMainMenu) {
 					IPCDispatcher.setGamePlaying(GameType.NONE, null, null, null, null);
