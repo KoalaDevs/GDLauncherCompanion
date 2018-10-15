@@ -6,7 +6,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import zabi.minecraft.gdlauncher.services.ModConfig;
-import zabi.minecraft.gdlauncher.utils.IPCDispatcher.GameType;
+import zabi.minecraft.gdlauncher.utils.IPCSimulator.GameType;
 
 public class GameStatusListener {
 	
@@ -26,13 +26,13 @@ public class GameStatusListener {
 
 	private static void notifyGameChange() {
 		if (Minecraft.getMinecraft().isSingleplayer()) {
-			IPCDispatcher.setGamePlaying(GameType.SINGLEPLAYER, ModConfig.shareWorldName?Minecraft.getMinecraft().getIntegratedServer().getWorldName():null, null, null, null);
+			IPCSimulator.setGamePlaying(GameType.SINGLEPLAYER, ModConfig.shareWorldName?Minecraft.getMinecraft().getIntegratedServer().getWorldName():null, null, null);
 		} else {
 			ServerData data = Minecraft.getMinecraft().getCurrentServerData();
 			if (ModConfig.shareServer) {
-				IPCDispatcher.setGamePlaying(GameType.MULTIPLAYER, data.serverName, data.serverIP, data.serverMOTD, data.getBase64EncodedIconData());
+				IPCSimulator.setGamePlaying(GameType.MULTIPLAYER, data.serverName, data.serverIP, data.serverMOTD);
 			} else {
-				IPCDispatcher.setGamePlaying(GameType.MULTIPLAYER, null, null, null, null);
+				IPCSimulator.setGamePlaying(GameType.MULTIPLAYER, null, null, null);
 			}
 		}
 	}
